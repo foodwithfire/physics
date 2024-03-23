@@ -2,11 +2,11 @@ import random, pygame, math
 from settings import *
 
 
-class Atom:
+class Entity:
     def __init__(self, pos):
         self.screen_size = screen_size
         self.pos = pos
-        self.vel = pygame.math.Vector2(0, 0)
+        self.vel = pygame.math.Vector2(random.randint(-1, 1), random.randint(-1, 1))
         self.color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
         self.size = 40
         self.max_dist = self.size
@@ -15,10 +15,6 @@ class Atom:
 
     def check_atom_collisions(self, target_pos, dt, mouse=1):
         diff = pygame.math.Vector2(target_pos - self.pos)
-        if diff.x < 0:
-            diff.x *= -1
-        if diff.y < 0:
-            diff.y *= -1
         dist = math.sqrt(diff[0]**2 + diff[1]**2)
 
         if dist < self.max_dist:
